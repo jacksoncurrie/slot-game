@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace GameLogic.Entities
 {
     class SpinnerGroup
