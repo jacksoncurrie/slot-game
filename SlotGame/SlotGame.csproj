@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DF3D2CEE-DE51-4BEE-B4E7-1B12B71946E4}</ProjectGuid>
+    <ProjectGuid>{998CBAA4-6AED-42EF-987C-03CDB6B8F550}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SlotGame</RootNamespace>
@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -130,8 +130,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Star.png" />
-    <Content Include="Assets\Cross.png" />
+    <Content Include="Assets\clubs.png" />
+    <Content Include="Assets\diamonds.png" />
+    <Content Include="Assets\hearts.png" />
+    <Content Include="Assets\spades.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -158,7 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameLogic\GameLogic.csproj">
-      <Project>{cec67904-7e84-43d3-b9da-582875990854}</Project>
+      <Project>{6bf4e71a-999f-4a64-812f-db00a0289baa}</Project>
       <Name>GameLogic</Name>
     </ProjectReference>
   </ItemGroup>

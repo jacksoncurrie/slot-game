@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameLogic.Entities
 {
-    class Spinner
+    public class Spinner
     {
         public Spinner(List<SpinnerImage> spinnerImages)
         {
@@ -12,7 +12,7 @@ namespace GameLogic.Entities
 
         public List<SpinnerImage> SpinnerImages { get; }
         public int CurrentSpinnerLocation { get; private set; }
-        public SpinnerImage CurrentSpinnerImage{ get => SpinnerImages[CurrentSpinnerLocation]; }
+        public SpinnerImage CurrentSpinnerImage { get => SpinnerImages[CurrentSpinnerLocation]; }
 
         /// <summary>
         /// Gets a random image position

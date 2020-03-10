@@ -2,7 +2,7 @@
 
 namespace GameLogic.Entities
 {
-    class SpinnerGroup
+    public class SpinnerGroup
     {
         public SpinnerGroup(List<Spinner> spinners, List<SpinnerImage> allSpinnerImages)
         {

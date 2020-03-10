@@ -1,6 +1,6 @@
 ﻿namespace GameLogic.Entities
 {
-    class SpinnerImage
+    public class SpinnerImage
     {
         public SpinnerImage(string spinnerName, string imageUrl, int imageValue)
         {

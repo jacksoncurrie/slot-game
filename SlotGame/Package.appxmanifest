@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="a3ed080a-e850-4392-833e-3993bd9d4d19"
-    Publisher="CN=30005345"
+    Name="4f5d66a3-9217-4739-b144-f208d47dcee2"
+    Publisher="CN=jack1"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="a3ed080a-e850-4392-833e-3993bd9d4d19" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="4f5d66a3-9217-4739-b144-f208d47dcee2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>SlotGame</DisplayName>
-    <PublisherDisplayName>30005345</PublisherDisplayName>
+    <PublisherDisplayName>jack1</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

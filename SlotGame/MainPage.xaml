@@ -22,17 +22,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Grid.ColumnSpan="5" HorizontalAlignment="Center" Text="Slot Game" VerticalAlignment="Center" FontSize="50"/>
-        
+
         <Border BorderThickness="2" Margin="10" BorderBrush="Black" Grid.Column="1" Grid.Row="1">
-            <Image x:Name="Slot1" Source="Assets/Star.png" Margin="20"/>
+            <Image x:Name="Slot1" Source="Assets/hearts.png" Margin="20"/>
         </Border>
         <Border BorderThickness="2" Margin="10" BorderBrush="Black" Grid.Column="2" Grid.Row="1">
-            <Image x:Name="Slot2" Source="Assets/Star.png" Margin="20"/>
+            <Image x:Name="Slot2" Source="Assets/clubs.png" Margin="20"/>
         </Border>
         <Border BorderThickness="2" Margin="10" BorderBrush="Black" Grid.Column="3" Grid.Row="1">
-            <Image x:Name="Slot3" Source="Assets/Cross.png" Margin="20"/>
+            <Image x:Name="Slot3" Source="Assets/diamonds.png" Margin="20"/>
         </Border>
 
         <Button Content="$1 Spin" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Padding="10" Click="Spin1_Click"/>

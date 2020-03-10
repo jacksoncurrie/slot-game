@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEC67904-7E84-43D3-B9DA-582875990854}</ProjectGuid>
+    <ProjectGuid>{6BF4E71A-999F-4A64-812F-DB00A0289BAA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GameLogic</RootNamespace>
@@ -120,6 +120,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Spinner.cs" />
     <Compile Include="Entities\SpinnerGroup.cs" />
     <Compile Include="Entities\SpinnerImage.cs" />
