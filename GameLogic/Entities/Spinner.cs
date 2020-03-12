@@ -5,11 +5,13 @@ namespace GameLogic.Entities
 {
     public class Spinner
     {
-        public Spinner(List<SpinnerImage> spinnerImages)
+        public Spinner(string spinnerName, List<SpinnerImage> spinnerImages)
         {
+            SpinnerName = spinnerName;
             SpinnerImages = spinnerImages;
         }
 
+        public string SpinnerName { get; }
         public List<SpinnerImage> SpinnerImages { get; }
         public int CurrentSpinnerLocation { get; private set; }
         public SpinnerImage CurrentSpinnerImage { get => SpinnerImages[CurrentSpinnerLocation]; }
@@ -45,11 +47,18 @@ namespace GameLogic.Entities
 
         private SpinnerImage[] GetSpinnerImages(int middleSpinnerLocation)
         {
+            var topLocation = middleSpinnerLocation - 1;
+            var bottomLocation = middleSpinnerLocation + 1;
+            if (topLocation < 0)
+                topLocation = SpinnerImages.Count - 1;
+            if (bottomLocation > SpinnerImages.Count - 1)
+                bottomLocation = 0;
+
             return new SpinnerImage[]
             {
-                SpinnerImages[middleSpinnerLocation - 1],
+                SpinnerImages[topLocation],
                 SpinnerImages[middleSpinnerLocation],
-                SpinnerImages[middleSpinnerLocation + 1]
+                SpinnerImages[bottomLocation]
             };
         }
 

@@ -120,7 +120,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Spinner.cs" />
     <Compile Include="Entities\SpinnerGroup.cs" />
     <Compile Include="Entities\SpinnerImage.cs" />
