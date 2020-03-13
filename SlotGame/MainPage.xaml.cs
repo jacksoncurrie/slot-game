@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using System.Linq;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,7 +23,7 @@ namespace SlotGame
 
             // Set up application
 
-            User = new User(300);
+            User = new User(1000);
 
             var spinnerImages = new List<SpinnerImage>
             {
@@ -34,11 +35,22 @@ namespace SlotGame
 
             var spinners = new List<Spinner>
             {
-                new Spinner("Spinner1", spinnerImages),
-                new Spinner("Spinner2", spinnerImages),
-                new Spinner("Spinner3", spinnerImages),
-                new Spinner("Spinner4", spinnerImages),
-                new Spinner("Spinner5", spinnerImages)
+                new Spinner("Spinner1", spinnerImages, new object[] {
+                    Slot1_1, Slot2_1, Slot3_1
+                }),
+                new Spinner("Spinner2", spinnerImages, new object[] 
+                {
+                    Slot1_2, Slot2_2, Slot3_2
+                }),
+                new Spinner("Spinner3", spinnerImages, new object[] {
+                    Slot1_3, Slot2_3, Slot3_3
+                }),
+                new Spinner("Spinner4", spinnerImages, new object[] {
+                    Slot1_4, Slot2_4, Slot3_4
+                }),
+                new Spinner("Spinner5", spinnerImages, new object[] {
+                    Slot1_5, Slot2_5, Slot3_5
+                })
             };
 
             SpinnerGroup = new SpinnerGroup(spinners, spinnerImages);
@@ -59,18 +71,43 @@ namespace SlotGame
                 await dialog.ShowAsync();
                 return;
             }
-                
-            User.GameBalance -= value;
 
             var currentSpinner = 0;
             foreach (var spinner in SpinnerGroup.Spinners)
             {
                 currentSpinner++;
                 var resultingImages = spinner.GetRandomSpinnerImages();
-                Slot1_1.Source = new BitmapImage(new Uri(resultingImages[0].ImageUrl));
-                Slot2_1.Source = new BitmapImage(new Uri(resultingImages[1].ImageUrl));
-                Slot3_1.Source = new BitmapImage(new Uri(resultingImages[2].ImageUrl));
+                SetImageSource(spinner.SpinnerControls[0], resultingImages[0].ImageUrl);
+                SetImageSource(spinner.SpinnerControls[1], resultingImages[1].ImageUrl);
+                SetImageSource(spinner.SpinnerControls[2], resultingImages[2].ImageUrl);
             }
+
+            var spinnerScores = SpinnerGroup.GetSpinnersCount();
+            int highestScore = spinnerScores.Values.Max();
+            int winnings = -value;
+            switch (highestScore)
+            {
+                case 3:
+                    winnings = 0;
+                    break;
+
+                case 4:
+                    winnings = value * 5;
+                    break;
+
+                case 5:
+                    winnings = value * 100;
+                    break;
+            }
+
+            User.GameBalance += winnings;
+            SetNewBalance();
         }
+
+        private void SetImageSource(object spinnerControl, string imageUrl) =>
+            (spinnerControl as Image).Source = new BitmapImage(new Uri(imageUrl));
+
+        private void SetNewBalance() =>
+            Balance.Text = $"Balance: ${User.GameBalance}";
     }
 }

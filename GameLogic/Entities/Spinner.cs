@@ -5,14 +5,16 @@ namespace GameLogic.Entities
 {
     public class Spinner
     {
-        public Spinner(string spinnerName, List<SpinnerImage> spinnerImages)
+        public Spinner(string spinnerName, List<SpinnerImage> spinnerImages, object[] spinnerControls)
         {
             SpinnerName = spinnerName;
             SpinnerImages = spinnerImages;
+            SpinnerControls = spinnerControls;
         }
 
         public string SpinnerName { get; }
         public List<SpinnerImage> SpinnerImages { get; }
+        public object[] SpinnerControls { get; }
         public int CurrentSpinnerLocation { get; private set; }
         public SpinnerImage CurrentSpinnerImage { get => SpinnerImages[CurrentSpinnerLocation]; }
 

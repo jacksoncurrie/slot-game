@@ -38,6 +38,15 @@
                    VerticalAlignment="Center" 
                    FontSize="50"/>
 
+        <TextBlock x:Name="Balance"
+                   Grid.Column="5"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="30"
+                   Margin="20"
+                   Text="Balance: $1000"/>
+
         <!-- Top Row -->
         
         <Border BorderThickness="2" 
