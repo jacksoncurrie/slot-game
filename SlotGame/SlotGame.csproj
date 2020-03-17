@@ -133,6 +133,7 @@
     <Content Include="Assets\clubs.png" />
     <Content Include="Assets\diamonds.png" />
     <Content Include="Assets\hearts.png" />
+    <Content Include="Assets\shuffling-animation.gif" />
     <Content Include="Assets\spades.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

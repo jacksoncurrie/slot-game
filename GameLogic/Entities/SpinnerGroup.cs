@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic.Entities
 {
@@ -24,6 +25,28 @@ namespace GameLogic.Entities
             // Count the spinners images and increment score
             Spinners.ForEach(spinner => spinnerScores[spinner.CurrentSpinnerImage]++);
             return spinnerScores;
+        }
+
+        public int GetWinnings(int[] spinnerValues, int spinBid)
+        {
+            int highestScore = spinnerValues.Max();
+            int winnings = -spinBid;
+            switch (highestScore)
+            {
+                case 3:
+                    winnings = 0;
+                    break;
+
+                case 4:
+                    winnings = spinBid * 4;
+                    break;
+
+                case 5:
+                    winnings = spinBid * 50;
+                    break;
+            }
+
+            return winnings;
         }
     }
 }

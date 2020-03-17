@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 using System.Linq;
+using Windows.Media.SpeechSynthesis;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,22 +36,11 @@ namespace SlotGame
 
             var spinners = new List<Spinner>
             {
-                new Spinner("Spinner1", spinnerImages, new object[] {
-                    Slot1_1, Slot2_1, Slot3_1
-                }),
-                new Spinner("Spinner2", spinnerImages, new object[] 
-                {
-                    Slot1_2, Slot2_2, Slot3_2
-                }),
-                new Spinner("Spinner3", spinnerImages, new object[] {
-                    Slot1_3, Slot2_3, Slot3_3
-                }),
-                new Spinner("Spinner4", spinnerImages, new object[] {
-                    Slot1_4, Slot2_4, Slot3_4
-                }),
-                new Spinner("Spinner5", spinnerImages, new object[] {
-                    Slot1_5, Slot2_5, Slot3_5
-                })
+                new Spinner("Spinner1", spinnerImages, new object[] { Slot1_1, Slot2_1, Slot3_1 }),
+                new Spinner("Spinner2", spinnerImages, new object[] { Slot1_2, Slot2_2, Slot3_2 }),
+                new Spinner("Spinner3", spinnerImages, new object[] { Slot1_3, Slot2_3, Slot3_3 }),
+                new Spinner("Spinner4", spinnerImages, new object[] { Slot1_4, Slot2_4, Slot3_4 }),
+                new Spinner("Spinner5", spinnerImages, new object[] { Slot1_5, Slot2_5, Slot3_5 })
             };
 
             SpinnerGroup = new SpinnerGroup(spinners, spinnerImages);
@@ -72,10 +62,13 @@ namespace SlotGame
                 return;
             }
 
-            var currentSpinner = 0;
+            SetSpinnersIsEnabled(false);
+
+            SetSpinnersLoading(SpinnerGroup.Spinners);
+            await Task.Delay(1000);
+
             foreach (var spinner in SpinnerGroup.Spinners)
             {
-                currentSpinner++;
                 var resultingImages = spinner.GetRandomSpinnerImages();
                 SetImageSource(spinner.SpinnerControls[0], resultingImages[0].ImageUrl);
                 SetImageSource(spinner.SpinnerControls[1], resultingImages[1].ImageUrl);
@@ -83,25 +76,25 @@ namespace SlotGame
             }
 
             var spinnerScores = SpinnerGroup.GetSpinnersCount();
-            int highestScore = spinnerScores.Values.Max();
-            int winnings = -value;
-            switch (highestScore)
-            {
-                case 3:
-                    winnings = 0;
-                    break;
-
-                case 4:
-                    winnings = value * 5;
-                    break;
-
-                case 5:
-                    winnings = value * 100;
-                    break;
-            }
+            var spinnerValues = spinnerScores.Values.ToArray();
+            var winnings = SpinnerGroup.GetWinnings(spinnerValues, value);
 
             User.GameBalance += winnings;
             SetNewBalance();
+            SetSpinnersIsEnabled(true);
+
+            if (winnings > 0)
+                SpeakText("You won");
+            else if (winnings < 0)
+                SpeakText("You lost");
+        }
+
+        private void SetSpinnersLoading(List<Spinner> spinners)
+        {
+            foreach (var spinner in spinners)
+                foreach (var spinnerControl in spinner.SpinnerControls)
+                    SetImageSource(spinnerControl, "ms-appx:///Assets/shuffling-animation.gif");
+            
         }
 
         private void SetImageSource(object spinnerControl, string imageUrl) =>
@@ -109,5 +102,25 @@ namespace SlotGame
 
         private void SetNewBalance() =>
             Balance.Text = $"Balance: ${User.GameBalance}";
+
+        private void SetSpinnersIsEnabled(bool isEnabled)
+        {
+            Spin1.IsEnabled = isEnabled;
+            Spin10.IsEnabled = isEnabled;
+            Spin100.IsEnabled = isEnabled;
+        }
+
+        private async void SpeakText(string text)
+        {
+            if (!string.IsNullOrEmpty(text))
+            {
+                var speechSynthesizer = new SpeechSynthesizer();
+                var speechStream = await speechSynthesizer.SynthesizeTextToStreamAsync(text);
+
+                MediaElement.AutoPlay = true;
+                MediaElement.SetSource(speechStream, speechStream.ContentType);
+                MediaElement.Play();
+            }
+        }
     }
 }

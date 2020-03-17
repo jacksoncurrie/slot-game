@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="White">
 
     <Grid Width="Auto">
         <Grid.ColumnDefinitions>
@@ -48,34 +48,37 @@
                    Text="Balance: $1000"/>
 
         <!-- Top Row -->
-        
+
         <Border BorderThickness="2" 
                 Margin="5" 
                 BorderBrush="Black"
                 Grid.Column="1" 
                 Grid.Row="1">
-            <Image x:Name="Slot1_1" 
+            <Image x:Name="Slot1_1"
+                   UseLayoutRounding="True"
                    Source="Assets/hearts.png" 
                    Margin="20"/>
         </Border>
-        
+
         <Border BorderThickness="2"
                 Margin="5" 
                 BorderBrush="Black" 
                 Grid.Column="2" 
                 Grid.Row="1">
             <Image x:Name="Slot1_2" 
-                   Source="Assets/clubs.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/hearts.png" 
                    Margin="20"/>
         </Border>
-        
+
         <Border BorderThickness="2" 
                 Margin="5" 
                 BorderBrush="Black" 
                 Grid.Column="3" 
                 Grid.Row="1">
             <Image x:Name="Slot1_3" 
-                   Source="Assets/diamonds.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/hearts.png" 
                    Margin="20"/>
         </Border>
 
@@ -85,7 +88,8 @@
                 Grid.Column="4" 
                 Grid.Row="1">
             <Image x:Name="Slot1_4" 
-                   Source="Assets/spades.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/hearts.png" 
                    Margin="20"/>
         </Border>
 
@@ -95,6 +99,7 @@
                 Grid.Column="5" 
                 Grid.Row="1">
             <Image x:Name="Slot1_5" 
+                   UseLayoutRounding="True"
                    Source="Assets/hearts.png" 
                    Margin="20"/>
         </Border>
@@ -107,7 +112,8 @@
                 Grid.Column="1" 
                 Grid.Row="2">
             <Image x:Name="Slot2_1" 
-                   Source="Assets/hearts.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/clubs.png" 
                    Margin="20"/>
         </Border>
 
@@ -117,6 +123,7 @@
                 Grid.Column="2" 
                 Grid.Row="2">
             <Image x:Name="Slot2_2" 
+                   UseLayoutRounding="True"
                    Source="Assets/clubs.png" 
                    Margin="20"/>
         </Border>
@@ -127,7 +134,8 @@
                 Grid.Column="3" 
                 Grid.Row="2">
             <Image x:Name="Slot2_3" 
-                   Source="Assets/diamonds.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/clubs.png" 
                    Margin="20"/>
         </Border>
 
@@ -137,7 +145,8 @@
                 Grid.Column="4" 
                 Grid.Row="2">
             <Image x:Name="Slot2_4" 
-                   Source="Assets/spades.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/clubs.png" 
                    Margin="20"/>
         </Border>
 
@@ -147,7 +156,8 @@
                 Grid.Column="5" 
                 Grid.Row="2">
             <Image x:Name="Slot2_5" 
-                   Source="Assets/hearts.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/clubs.png" 
                    Margin="20"/>
         </Border>
 
@@ -159,7 +169,8 @@
                 Grid.Column="1" 
                 Grid.Row="3">
             <Image x:Name="Slot3_1" 
-                   Source="Assets/hearts.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/diamonds.png" 
                    Margin="20"/>
         </Border>
 
@@ -169,7 +180,8 @@
                 Grid.Column="2" 
                 Grid.Row="3">
             <Image x:Name="Slot3_2" 
-                   Source="Assets/clubs.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/diamonds.png" 
                    Margin="20"/>
         </Border>
 
@@ -179,6 +191,7 @@
                 Grid.Column="3" 
                 Grid.Row="3">
             <Image x:Name="Slot3_3" 
+                   UseLayoutRounding="True"
                    Source="Assets/diamonds.png" 
                    Margin="20"/>
         </Border>
@@ -189,7 +202,8 @@
                 Grid.Column="4" 
                 Grid.Row="3">
             <Image x:Name="Slot3_4" 
-                   Source="Assets/spades.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/diamonds.png" 
                    Margin="20"/>
         </Border>
 
@@ -199,11 +213,13 @@
                 Grid.Column="5" 
                 Grid.Row="3">
             <Image x:Name="Slot3_5" 
-                   Source="Assets/hearts.png" 
+                   UseLayoutRounding="True"
+                   Source="Assets/diamonds.png" 
                    Margin="20"/>
         </Border>
 
         <Button Content="$1 Spin" 
+                x:Name="Spin1"
                 Grid.Column="2" 
                 Grid.Row="4" 
                 HorizontalAlignment="Center"
@@ -211,6 +227,7 @@
                 FontSize="20" Padding="10" 
                 Click="Spin1_Click"/>
         <Button Content="$10 Spin" 
+                x:Name="Spin10"
                 Grid.Column="3" 
                 Grid.Row="4"
                 HorizontalAlignment="Center" 
@@ -218,11 +235,14 @@
                 FontSize="20" Padding="10" 
                 Click="Spin10_Click"/>
         <Button Content="$100 Spin" 
+                x:Name="Spin100"
                 Grid.Column="4"
                 Grid.Row="4" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 FontSize="20" Padding="10" 
                 Click="Spin100_Click"/>
+
+        <MediaElement x:Name="MediaElement" />
     </Grid>
 </Page>
