@@ -55,38 +55,42 @@ namespace SlotGame
 
         private async Task DoSpin(int value)
         {
-            if (User.GameBalance < value)
+            try
             {
-                var dialog = new MessageDialog("Not enough funds to spin.", "Low Balance");
+                if (User.GameBalance < value)
+                    throw new NotEnoughFundsException(User.GameBalance);
+
+                SetSpinnersIsEnabled(false);
+
+                SetSpinnersLoading(SpinnerGroup.Spinners);
+                await Task.Delay(1000);
+
+                foreach (var spinner in SpinnerGroup.Spinners)
+                {
+                    var resultingImages = spinner.GetRandomSpinnerImages();
+                    SetImageSource(spinner.SpinnerControls[0], resultingImages[0].ImageUrl);
+                    SetImageSource(spinner.SpinnerControls[1], resultingImages[1].ImageUrl);
+                    SetImageSource(spinner.SpinnerControls[2], resultingImages[2].ImageUrl);
+                }
+
+                var spinnerScores = SpinnerGroup.GetSpinnersCount();
+                var spinnerValues = spinnerScores.Values.ToArray();
+                var winnings = SpinnerGroup.GetWinnings(spinnerValues, value);
+
+                User.GameBalance += winnings;
+                SetNewBalance();
+                SetSpinnersIsEnabled(true);
+
+                if (winnings > 0)
+                    SpeakText("You won");
+                else if (winnings < 0)
+                    SpeakText("You lost");
+            }
+            catch (NotEnoughFundsException exception)
+            {
+                var dialog = new MessageDialog(exception.Message, "Low Balance");
                 await dialog.ShowAsync();
-                return;
             }
-
-            SetSpinnersIsEnabled(false);
-
-            SetSpinnersLoading(SpinnerGroup.Spinners);
-            await Task.Delay(1000);
-
-            foreach (var spinner in SpinnerGroup.Spinners)
-            {
-                var resultingImages = spinner.GetRandomSpinnerImages();
-                SetImageSource(spinner.SpinnerControls[0], resultingImages[0].ImageUrl);
-                SetImageSource(spinner.SpinnerControls[1], resultingImages[1].ImageUrl);
-                SetImageSource(spinner.SpinnerControls[2], resultingImages[2].ImageUrl);
-            }
-
-            var spinnerScores = SpinnerGroup.GetSpinnersCount();
-            var spinnerValues = spinnerScores.Values.ToArray();
-            var winnings = SpinnerGroup.GetWinnings(spinnerValues, value);
-
-            User.GameBalance += winnings;
-            SetNewBalance();
-            SetSpinnersIsEnabled(true);
-
-            if (winnings > 0)
-                SpeakText("You won");
-            else if (winnings < 0)
-                SpeakText("You lost");
         }
 
         private void SetSpinnersLoading(List<Spinner> spinners)
