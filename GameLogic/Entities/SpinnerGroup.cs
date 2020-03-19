@@ -31,6 +31,8 @@ namespace GameLogic.Entities
         {
             int highestScore = spinnerValues.Max();
             int winnings = -spinBid;
+
+            // Winning 
             switch (highestScore)
             {
                 case 3:

@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Windows.Media.SpeechSynthesis;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace SlotGame
 {
     /// <summary>
@@ -53,6 +51,17 @@ namespace SlotGame
         private async void Spin10_Click(object sender, RoutedEventArgs e) => await DoSpin(10);
         private async void Spin100_Click(object sender, RoutedEventArgs e) => await DoSpin(100);
 
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Show instructions
+            var dialog = new MessageDialog("You have $1000 to spin.\n" +
+                "If you get 3 of the same horizontally, you keep your bet.\n" +
+                "If you get 4 of the same horizontally, you get 4x your bet back\n" +
+                "If you get 5 of the same horizontally, you get 50x your bet back\n" +
+                "Good luck!", "Slot Game");
+            await dialog.ShowAsync();
+        }
+
         private async Task DoSpin(int value)
         {
             try
@@ -88,6 +97,7 @@ namespace SlotGame
             }
             catch (NotEnoughFundsException exception)
             {
+                // Handle error when not enough funds are available
                 var dialog = new MessageDialog(exception.Message, "Low Balance");
                 await dialog.ShowAsync();
             }
