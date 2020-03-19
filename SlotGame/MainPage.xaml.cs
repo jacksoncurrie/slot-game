@@ -66,11 +66,13 @@ namespace SlotGame
         {
             try
             {
+                // Check for enough funds
                 if (User.GameBalance < value)
                     throw new NotEnoughFundsException(User.GameBalance);
 
                 SetSpinnersIsEnabled(false);
 
+                // Animate spinners spinning
                 SetSpinnersLoading(SpinnerGroup.Spinners);
                 await Task.Delay(1000);
 
@@ -86,10 +88,12 @@ namespace SlotGame
                 var spinnerValues = spinnerScores.Values.ToArray();
                 var winnings = SpinnerGroup.GetWinnings(spinnerValues, value);
 
+                // Update balance
                 User.GameBalance += winnings;
                 SetNewBalance();
                 SetSpinnersIsEnabled(true);
 
+                // Speak result to user
                 if (winnings > 0)
                     SpeakText("You won");
                 else if (winnings < 0)
